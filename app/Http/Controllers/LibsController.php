@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreLibRequest;
+use App\Http\Requests\UpdateLibRequest;
+use App\Lib;
+use Auth;
+use Gate;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use \Illuminate\Support\Facades\Response;
+
+class LibsController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $libs = Lib::all();
+        return view('libs.index', compact('libs'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('libs.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StoreLibRequest $request)
+    {
+        $lib = new Lib($request->except('_token'));
+        Auth::user()->write($lib);
+
+        return redirect('/libs');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Lib $lib)
+    {
+        return view('libs.show', compact('lib'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Lib $lib)
+    {
+        return view('libs.edit', compact('lib'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param UpdateLibRequest|Request $request
+     * @param Lib $lib
+     * @return \Illuminate\Http\Response
+     * @internal param int $id
+     */
+    public function update(UpdateLibRequest $request, Lib $lib)
+    {
+        \Log::info("sdfdsf");
+        $lib->fill($request->all());
+        $lib->save();
+        return redirect("/libs/$lib->id");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Lib $lib)
+    {
+        if(Gate::denies('destroy', $lib)) {
+            abort(402);
+        }
+
+        $lib->delete();
+        return redirect('/libs');
+    }
+
+    public function play(Lib $lib)
+    {
+        $lib->formatForPlay();
+
+        return view('libs.play', compact('lib'));
+    }
+}

@@ -6,7 +6,10 @@
             <h3>{{ $lib->title }}</h3>
             <p>{{ $lib->body }}</p>
 
-            <a href="/libs/{{ $lib->id }}/edit">Edit Lib</a>
+
+            @can('update', $lib)
+                <a href="/libs/{{ $lib->id }}/edit">Edit Lib</a>
+            @endcan
 
             @can('destroy', $lib)
                 {!! Form::model($lib, ['url' => ['libs', $lib->id], 'method' => 'delete' ]) !!}

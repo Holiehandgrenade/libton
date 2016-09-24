@@ -23,7 +23,7 @@ class LibAcceptanceTest extends TestCase
         factory(\App\Lib::class, 4)->create();
 
         $this->visit('/libs')
-            ->countElements('.lib', 4);
+            ->countElements('.lib-links', 4);
     }
 
     /** @test */

@@ -41,7 +41,7 @@ class LibAcceptanceTest extends TestCase
     /** @test */
     public function the_show_page_formats_blanks_as_underlined_words()
     {
-        $libBody = "What a nice {{game:noun}}";
+        $libBody = "What a nice {%game:noun%}";
         $lib = factory(\App\Lib::class)->create(['body' => $libBody]);
 
         $this->visit("/libs/$lib->id")
@@ -53,7 +53,7 @@ class LibAcceptanceTest extends TestCase
     {
         $this->visit('/libs/create')
             ->type('My First Lib', 'title')
-            ->type('This is a {{noun}}', 'body')
+            ->type('This is a {%game:noun%}', 'body')
             ->press('Create Lib');
 
         $this->seeInDatabase('libs', ['title' => 'My First Lib'])
@@ -172,7 +172,7 @@ class LibAcceptanceTest extends TestCase
     /** @test */
     public function the_play_page_has_an_input_for_every_blank_entered_into_the_libs_body()
     {
-        $libBody = "This is such a {{fun:adjective}} day! I can't {{believe:verb}} what we are doing!";
+        $libBody = "This is such a {%fun:adjective%} day! I can't {%believe:verb%} what we are doing!";
         $lib = factory(\App\Lib::class)->make(['body' => $libBody]);
         $this->user->write($lib);
 
@@ -183,7 +183,7 @@ class LibAcceptanceTest extends TestCase
     /** @test */
     public function the_inputs_have_placeholders_matching_their_parts_of_speech()
     {
-        $libBody = "This is such a {{fun:adjective}} day! I can't {{believe:verb}} what we are doing!";
+        $libBody = "This is such a {%fun:adjective%} day! I can't {%believe:verb%} what we are doing!";
         $lib = factory(\App\Lib::class)->make(['body' => $libBody]);
         $this->user->write($lib);
 

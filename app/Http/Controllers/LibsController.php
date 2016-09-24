@@ -57,6 +57,7 @@ class LibsController extends Controller
      */
     public function show(Lib $lib)
     {
+        $lib->format('show');
         return view('libs.show', compact('lib'));
     }
 
@@ -81,7 +82,6 @@ class LibsController extends Controller
      */
     public function update(UpdateLibRequest $request, Lib $lib)
     {
-        \Log::info("sdfdsf");
         $lib->fill($request->all());
         $lib->save();
         return redirect("/libs/$lib->id");
@@ -105,7 +105,7 @@ class LibsController extends Controller
 
     public function play(Lib $lib)
     {
-        $lib->formatForPlay();
+        $lib->format('play');
 
         return view('libs.play', compact('lib'));
     }

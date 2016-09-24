@@ -13,28 +13,43 @@ class Lib extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function formatForPlay()
+    public function format($method)
     {
         $matches = $this->findMarkupMatches();
 
         foreach ($matches as $match) {
-            $this->replaceMarkupWithInput($match);
-        }
+            // makes the matched markup into regex pattern
+            $match = $this->turnMatchIntoPattern($match);
 
-        return $this;
+            // gets part of speech from the markup between : and }}
+            $part_of_speech = $this->getMarkupPartOfSpeech($match);
+
+            if($method == 'show') {
+                $this->replaceMarkupWithUnderlinedWords($match, $part_of_speech);
+                continue;
+            }
+
+            $this->replaceMarkupWithInput($match, $part_of_speech);
+        }
     }
 
     /**
      * @param $match
      */
-    protected function replaceMarkupWithInput($match)
+    protected function replaceMarkupWithUnderlinedWords($match, $part_of_speech)
     {
-        // makes the matched markup into regex pattern
-        $match = $this->turnMatchIntoPattern($match);
+        // creates input replacement
+        $replacement = "<span style='text-decoration: underline'>$part_of_speech</span>";
 
-        // gets part of speech from the markup between : and }}
-        $part_of_speech = $this->getMarkupPartOfSpeech($match);
+        // replaces matches with replacement input
+        $this->body = preg_replace($match, $replacement, $this->body);
+    }
 
+    /**
+     * @param $match
+     */
+    protected function replaceMarkupWithInput($match, $part_of_speech)
+    {
         // creates input replacement
         $replacement = "<input class='lib-input' placeholder='$part_of_speech'>";
 

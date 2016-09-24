@@ -4,8 +4,7 @@
     <div class="container">
         <div class="row">
             <h3>{{ $lib->title }}</h3>
-            <p>{{ $lib->body }}</p>
-
+            <p>{!! $lib->body !!}</p>
 
             @can('update', $lib)
                 <a href="/libs/{{ $lib->id }}/edit">Edit Lib</a>

@@ -39,6 +39,16 @@ class LibAcceptanceTest extends TestCase
     }
 
     /** @test */
+    public function the_show_page_formats_blanks_as_underlined_words()
+    {
+        $libBody = "What a nice {{game:noun}}";
+        $lib = factory(\App\Lib::class)->create(['body' => $libBody]);
+
+        $this->visit("/libs/$lib->id")
+            ->countElements('span[style="text-decoration: underline"]', 1);
+    }
+
+    /** @test */
     public function a_user_can_submit_a_lib()
     {
         $this->visit('/libs/create')

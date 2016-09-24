@@ -47,15 +47,17 @@ class LibsController extends Controller
         $body = $request->input('body');
         $title = $request->input('title');
 
-        foreach ($inputs as $input) {
+        if(count($inputs)) {
+            foreach ($inputs as $input) {
 
-            // remove non alphanumeric values from the input
-            $input['value'] = preg_replace("/[^\w]/", "", $input['value']);
+                // remove non alphanumeric values from the input
+                $input['value'] = preg_replace("/[^\w]/", "", $input['value']);
 
-            // replace inputs with markup
-            $replacement = "{%" . $input['value'] . ":" . $input['speech'] . "%}";
-            $pattern = '/<input id="' . $input['id'] . '" placeholder="' . $input['speech'] . '">/';
-            $body = preg_replace($pattern, $replacement, $body);
+                // replace inputs with markup
+                $replacement = "{%" . $input['value'] . ":" . $input['speech'] . "%}";
+                $pattern = '/<input id="' . $input['id'] . '" placeholder="' . $input['speech'] . '">/';
+                $body = preg_replace($pattern, $replacement, $body);
+            }
         }
 
         // remove added non breaking spaces

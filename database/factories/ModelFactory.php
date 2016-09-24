@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Lib::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
-        'body' => $faker->paragraph,
+        'body' => 'Lib with {%sample:adjective$} markup',
         'user_id' => factory(\App\User::class)->create()->id,
     ];
 });

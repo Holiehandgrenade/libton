@@ -41,7 +41,8 @@ class LibAcceptanceTest extends TestCase
     /** @test */
     public function the_show_page_formats_blanks_as_underlined_words()
     {
-        $libBody = "What a nice {%game:noun%}";
+
+        $libBody = "Here is another {%lib:noun%}!";
         $lib = factory(\App\Lib::class)->create(['body' => $libBody]);
 
         $this->visit("/libs/$lib->id")

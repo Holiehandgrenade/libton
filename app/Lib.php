@@ -63,9 +63,9 @@ class Lib extends Model
     protected function findMarkupMatches()
     {
         // example markup: {{word:part_of_speech}}
-        $pattern = "/{%[a-zA-Z]+:[a-zA-Z]+%}/";
-        preg_match_all($pattern, $this->body, $matches);
 
+        $pattern = "/{%[\w]+:[A-z]+%}/";
+        preg_match_all($pattern, $this->body, $matches);
         return $matches[0];
     }
 

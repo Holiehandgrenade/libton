@@ -43,7 +43,28 @@ class LibsController extends Controller
      */
     public function store(StoreLibRequest $request)
     {
-        $lib = new Lib($request->except('_token'));
+        $inputs = $request->input('inputs');
+        $body = $request->input('body');
+        $title = $request->input('title');
+
+        foreach ($inputs as $input) {
+
+            // remove non alphanumeric values from the input
+            $input['value'] = preg_replace("/[^\w]/", "", $input['value']);
+
+            // replace inputs with markup
+            $replacement = "{%" . $input['value'] . ":" . $input['speech'] . "%}";
+            $pattern = '/<input id="' . $input['id'] . '" placeholder="' . $input['speech'] . '">/';
+            $body = preg_replace($pattern, $replacement, $body);
+        }
+
+        // remove added non breaking spaces
+        $body = preg_replace("/&nbsp;/", " ", $body);
+
+        $lib = new Lib([
+            'title' => $title,
+            'body' => $body,
+        ]);
         Auth::user()->write($lib);
 
         return redirect('/libs');

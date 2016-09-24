@@ -14,6 +14,7 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('lib-editor', require('./components/LibEditor.vue'));
 
 const app = new Vue({
     el: 'body'

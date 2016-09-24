@@ -73,6 +73,18 @@ class LibAcceptanceTest extends TestCase
     }
 
     /** @test */
+    public function the_edit_page_is_populated_with_lib_data()
+    {
+        $lib = factory(\App\Lib::class)->make();
+        $this->user->write($lib);
+
+        $this->visit("/libs/$lib->id/edit");
+
+        $this->see($lib->title)
+            ->see($lib->body);
+    }
+
+    /** @test */
     public function the_edit_button_shows_up_for_the_libs_writer()
     {
         $lib = factory(\App\Lib::class)->make();

@@ -6,13 +6,13 @@
             {!! Form::model($lib, ['url' => ['/libs', $lib->id], 'method' => 'patch']) !!}
             <div class="form-group">
                 {!! Form::label('title', 'Title') !!}
-                {!! Form::text('title', null, [
+                {!! Form::text('title', $lib->title, [
                     'class' => 'form-control',
                 ]) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('body', 'Body') !!}
-                {!! Form::textarea('body', null, [
+                {!! Form::textarea('body', $lib->body, [
                     'class' => 'form-control',
                 ]) !!}
             </div>

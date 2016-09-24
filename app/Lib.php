@@ -63,7 +63,7 @@ class Lib extends Model
     protected function findMarkupMatches()
     {
         // example markup: {{word:part_of_speech}}
-        $pattern = "/{{[a-zA-Z]+:[a-zA-Z]+}}/";
+        $pattern = "/{%[a-zA-Z]+:[a-zA-Z]+%}/";
         preg_match_all($pattern, $this->body, $matches);
 
         return $matches[0];
@@ -76,7 +76,7 @@ class Lib extends Model
     protected function getMarkupPartOfSpeech($match)
     {
         // extracts the word between markup : and }}
-        preg_match('/(?<=:)(.*)(?=}})/', $match, $part_of_speech);
+        preg_match('/(?<=:)(.*)(?=%})/', $match, $part_of_speech);
         return $part_of_speech[0];
     }
 

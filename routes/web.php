@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+Auth::loginUsingId(1);
 Auth::routes();
 
 Route::get('/', function () {

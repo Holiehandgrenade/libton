@@ -1,0 +1,1 @@
+@each('nav.left.pd-partner', Auth::user()->partners, 'pdPartner')

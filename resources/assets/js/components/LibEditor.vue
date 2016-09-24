@@ -1,9 +1,16 @@
 <template>
-    <div class="col-md-3 col-md-offset-1">
+    <div class="col-md-2">
         <div class="part-of-speech-card">Noun</div>
         <div class="part-of-speech-card">Verb</div>
         <div class="part-of-speech-card">Adjective</div>
         <div class="part-of-speech-card">Adverb</div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="part-of-speech-card">Plural Noun</div>
+        <div class="part-of-speech-card">Verb (ing)</div>
+        <div class="part-of-speech-card">Number</div>
+        <div class="part-of-speech-card">Person</div>
     </div>
 
     <div class="col-md-8">

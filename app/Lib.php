@@ -64,7 +64,7 @@ class Lib extends Model
     {
         // example markup: {{word:part_of_speech}}
 
-        $pattern = "/{%[\w]+:[A-z]+%}/";
+        $pattern = "/{%[\w]+:[A-z\s]+%}/";
         preg_match_all($pattern, $this->body, $matches);
         return $matches[0];
     }

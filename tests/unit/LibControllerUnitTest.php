@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class LibControllerUnitTest extends TestCase
 {
     use DatabaseTransactions;
-    
+
     /** @test */
     public function it_can_create_a_lib()
     {

@@ -29,8 +29,8 @@
                 ]) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('confirm_password', 'Confirm Password') !!}
-                {!! Form::password('confirm_password', [
+                {!! Form::label('password_confirmation', 'Confirm Password') !!}
+                {!! Form::password('password_confirmation', [
                     'class' => 'form-control',
                 ]) !!}
             </div>

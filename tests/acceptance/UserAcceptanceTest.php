@@ -35,7 +35,7 @@ class UserAcceptanceTest extends TestCase
             ->type('Name', 'last_name')
             ->type('a@b.com', 'email')
             ->type('asdfghjkl', 'password')
-            ->type('asdfghjkl', 'confirm_password')
+            ->type('asdfghjkl', 'password_confirmation')
             ->press('Save Changes');
 
         $this->seeInDatabase('users', [

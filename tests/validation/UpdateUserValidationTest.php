@@ -136,6 +136,18 @@ class UpdateUserValidationTest extends TestCase
 
         $this->seeInDatabase('users', $this->userData);
     }
+
+    /** @test */
+    public function password_must_be_minimum_6_chars()
+    {
+        $this->userData['password'] = 'AA';
+        $this->userData['password_confirmation'] = 'AA';
+
+        $this->patch('/users/' . $this->user->id, $this->userData)
+            ->unsetPasswords();
+
+        $this->notSeeInDatabase('users', $this->userData);
+    }
     
     /** @test */
     public function password_must_be_confirmed()

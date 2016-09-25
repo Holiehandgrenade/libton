@@ -23,3 +23,5 @@ Route::resource('libs', 'LibsController');
 Route::get('libs/{lib}/play', 'LibsController@play');
 
 Route::get('/my/account', 'SelfController@account');
+
+Route::patch('/users/{user}', 'UserController@update');

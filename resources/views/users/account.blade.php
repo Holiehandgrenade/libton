@@ -12,17 +12,29 @@
             </div>
             <div class="form-group">
                 {!! Form::label('last_name', 'Last Name') !!}
-                {!! Form::textarea('last_name', $user->last_name, [
+                {!! Form::text('last_name', $user->last_name, [
                     'class' => 'form-control',
                 ]) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('email', 'Email') !!}
-                {!! Form::textarea('email', $user->email, [
+                {!! Form::text('email', $user->email, [
                     'class' => 'form-control',
                 ]) !!}
             </div>
-            {!! Form::submit('Update Lib', [
+            <div class="form-group">
+                {!! Form::label('password', 'New Password') !!}
+                {!! Form::password('password', [
+                    'class' => 'form-control',
+                ]) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('confirm_password', 'Confirm Password') !!}
+                {!! Form::password('confirm_password', [
+                    'class' => 'form-control',
+                ]) !!}
+            </div>
+            {!! Form::submit('Save Changes', [
                 'class' => 'btn btn-default btn-lg',
             ]) !!}
             {!! Form::close() !!}

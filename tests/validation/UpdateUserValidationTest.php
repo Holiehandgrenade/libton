@@ -4,7 +4,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class UserValidationTest extends TestCase
+class UpdateUserValidationTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -24,17 +24,6 @@ class UserValidationTest extends TestCase
             'password' => 'asdfghjkl',
             'password_confirmation' => 'asdfghjkl',
         ];
-    }
-
-    /** @test */
-    public function a_well_formatted_user_can_be_created()
-    {
-        $this->post('/register', $this->userData);
-
-        unset($this->userData['password']);
-        unset($this->userData['password_confirmation']);
-
-        $this->seeInDatabase('users', $this->userData);
     }
 
     /** @test */

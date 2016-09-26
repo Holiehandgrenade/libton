@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
+use Gate;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -84,8 +85,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if(Gate::denies('destroy', $user)) {
+            abort(403);
+        }
+
+        $user->delete();
     }
 }

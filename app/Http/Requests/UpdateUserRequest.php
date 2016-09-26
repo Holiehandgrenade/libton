@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Auth;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -13,7 +15,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $userToBeUpdate = $this->route('user');
+        return Gate::allows('update', $userToBeUpdate);
     }
 
     /**

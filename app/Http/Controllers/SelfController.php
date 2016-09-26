@@ -14,4 +14,10 @@ class SelfController extends Controller
         $user = Auth::user();
         return view('users.account', compact('user'));
     }
+
+    public function libs()
+    {
+        $libs = Auth::user()->libs;
+        return view('users.libs', compact('libs'));
+    }
 }

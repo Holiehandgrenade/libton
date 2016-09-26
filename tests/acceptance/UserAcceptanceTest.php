@@ -44,4 +44,19 @@ class UserAcceptanceTest extends TestCase
             'email' => 'a@b.com',
         ]);
     }
+
+    /** @test */
+    public function a_user_can_see_all_of_the_libs_they_created()
+    {
+        $libOne = factory(\App\Lib::class)->make();
+        $libTwo = factory(\App\Lib::class)->make();
+
+        $this->user->write($libOne);
+        $this->user->write($libTwo);
+
+        $this->visit('/my/libs');
+
+        $this->see($libOne->title);
+        $this->see($libTwo->title);
+    }
 }

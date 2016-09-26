@@ -23,6 +23,7 @@ Route::resource('libs', 'LibsController');
 Route::get('libs/{lib}/play', 'LibsController@play');
 
 Route::get('/my/account', 'SelfController@account');
+Route::get('/my/libs', 'SelfController@libs');
 
 Route::patch('/users/{user}', 'UserController@update');
 Route::delete('/users/{user}', 'UserController@destroy');

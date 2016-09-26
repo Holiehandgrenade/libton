@@ -49,7 +49,7 @@ class LibAcceptanceTest extends TestCase
             ->countElements('span[style="text-decoration: underline"]', 1);
     }
 
-    // vue component
+    // vue component breaks this submission
 
 //    /** @test */
 //    public function a_user_can_submit_a_lib()
@@ -193,5 +193,16 @@ class LibAcceptanceTest extends TestCase
         $this->visit("/libs/$lib->id/play")
             ->countElements('input[placeholder="adjective"]', 1)
             ->countElements('input[placeholder="verb"]', 1);
+    }
+
+    /** @test */
+    public function parts_of_speech_can_have_spaces()
+    {
+        $libBody = "I have many {%things:plural noun%}";
+        $lib = factory(\App\Lib::class)->make(['body' => $libBody]);
+        $this->user->write($lib);
+
+        $this->visit("/libs/$lib->id/play")
+            ->countElements('input[placeholder="plural noun"]', 1);
     }
 }

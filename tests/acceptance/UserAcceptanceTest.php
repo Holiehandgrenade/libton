@@ -59,4 +59,21 @@ class UserAcceptanceTest extends TestCase
         $this->see($libOne->title);
         $this->see($libTwo->title);
     }
+
+    /** @test */
+    public function a_user_can_only_see_their_libs_on_the_my_libs_route()
+    {
+        $otherUser = factory(\App\User::class)->create();
+
+        $libOne = factory(\App\Lib::class)->make();
+        $libTwo = factory(\App\Lib::class)->make();
+
+        $this->user->write($libOne);
+        $otherUser->write($libTwo);
+
+        $this->visit('/my/libs');
+
+        $this->see($libOne->title);
+        $this->dontSee($libTwo->title);
+    }
 }

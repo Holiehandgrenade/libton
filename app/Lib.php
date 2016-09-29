@@ -19,9 +19,13 @@ class Lib extends Model
     }
 
 
-    public function tag(Tag $tag)
+    public function tag($tag)
     {
-        return $this->tags()->save($tag);
+        if($tag instanceof Tag) {
+            return $this->tags()->save($tag);
+        }
+
+        return $this->tags()->saveMany($tag);
     }
 
     public function format($method)

@@ -19,4 +19,27 @@ class LibControllerUnitTest extends TestCase
 
         $this->assertResponseStatus(302);
     }
+
+    /** @test */
+    public function a_lib_can_be_tagged_with_one_tag()
+    {
+        $lib = factory(\App\Lib::class)->create();
+        $tag = factory(\App\Tag::class)->create();
+
+        $lib->tag($tag);
+
+        $this->assertCount(1, $lib->tags);
+        $this->assertEquals($tag->id, $lib->tags->first()->id);
+    }
+
+    /** @test */
+    public function a_lib_can_be_tagged_with_many_tags()
+    {
+        $lib = factory(\App\Lib::class)->create();
+        $tags = factory(\App\Tag::class, 4)->create();
+
+        $lib->tag($tags);
+
+        $this->assertCount(4, $lib->tags);
+    }
 }

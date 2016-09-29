@@ -13,6 +13,17 @@ class Lib extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+    public function tag(Tag $tag)
+    {
+        return $this->tags()->save($tag);
+    }
+
     public function format($method)
     {
         $matches = $this->findMarkupMatches();

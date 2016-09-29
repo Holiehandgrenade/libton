@@ -21,11 +21,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(App\Lib::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
         'body' => 'Lib with {%sample:adjective$} markup',
         'user_id' => factory(\App\User::class)->create()->id,
+    ];
+});
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'slug' => $faker->word,
+        'label' => $faker->word,
     ];
 });

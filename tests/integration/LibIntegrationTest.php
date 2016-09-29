@@ -18,4 +18,17 @@ class LibIntegrationTest extends TestCase
 
         $this->assertEquals($user->id, $lib->user->id);
     }
+
+    /** @test */
+    public function it_can_have_many_tags()
+    {
+        $lib = factory(\App\Lib::class)->create();
+        $tags = factory(\App\Tag::class, 4)->create();
+
+        $tags->each(function ($tag) use($lib) {
+            $lib->tag($tag);
+        });
+
+        $this->assertCount(4, $lib->tags);
+    }
 }

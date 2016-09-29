@@ -88,7 +88,7 @@
                 this.$http.post("/libs", postData)
                     .then(
                         function (res) {
-                            console.log(res);
+                            window.location.href = res.body.url;
                         },
                         function (err) {
                             console.warn(err);

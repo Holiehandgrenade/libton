@@ -69,7 +69,9 @@ class LibsController extends Controller
         ]);
         Auth::user()->write($lib);
 
-        return redirect('/libs');
+        return Response::json([
+            'url' => '/libs/' . $lib->id,
+        ], 200);
     }
 
     /**

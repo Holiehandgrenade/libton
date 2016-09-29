@@ -19,6 +19,8 @@ class Lib extends Model
     }
 
 
+
+
     public function tag($tag)
     {
         if($tag instanceof Tag) {
@@ -27,6 +29,10 @@ class Lib extends Model
 
         return $this->tags()->saveMany($tag);
     }
+
+
+
+
 
     public function format($method)
     {

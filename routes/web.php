@@ -27,3 +27,5 @@ Route::get('/my/libs', 'SelfController@libs');
 
 Route::patch('/users/{user}', 'UserController@update');
 Route::delete('/users/{user}', 'UserController@destroy');
+
+Route::post('/libs/{lib}/tags', 'LibsTagsController@store');
